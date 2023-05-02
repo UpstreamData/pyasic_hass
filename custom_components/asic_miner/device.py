@@ -7,15 +7,6 @@ from pyasic.network import ping_and_get_miner
 
 _LOGGER = logging.getLogger(__name__)
 
-async def async_setup_entry(hass, config_entry, async_add_entities):
-    """Set up the ASIC miner devices."""
-    ip_address = config_entry.data["ip_address"]
-    miner = MinerDevice(ip_address)
-    entities = []
-    for attr in MINER_ATTRS:
-        entities.append(MinerAttribute(miner, attr))
-    async_add_entities(entities)
-
 class MinerDevice(Entity):
     def __init__(self, ip):
         self.ip = ip
