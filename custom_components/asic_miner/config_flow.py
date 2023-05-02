@@ -1,48 +1,36 @@
-from .const import DOMAIN, CONF_IP
-from homeassistant import config_entries
 import voluptuous as vol
-from copy import deepcopy
-import logging
-from typing import Any, Dict, Optional
-
-from homeassistant import config_entries, core
-from homeassistant.const import CONF_ACCESS_TOKEN, CONF_NAME, CONF_PATH, CONF_URL
-from homeassistant.core import callback
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant import config_entries
+from homeassistant.const import CONF_IP_ADDRESS
 import homeassistant.helpers.config_validation as cv
-from homeassistant.helpers.entity_registry import (
-    async_entries_for_config_entry,
-    async_get,
-)
-
-MINER_SCHEMA = vol.Schema(
-    {
-        vol.Required(CONF_IP): str,
-    }
-)
 
 
-async def validate_miner_exists():
-    pass
-
-
-class MinerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    VERSION = 1
+class AsicMinerConfigFlow(config_entries.ConfigFlow, domain="asic_miner"):
+    """Asic Miner config flow."""
 
     async def async_step_user(self, user_input=None):
+        """Handle the initial step."""
         if user_input is not None:
-            print(user_input)
+            # Validate the IP address.
+            ip_address = user_input[CONF_IP_ADDRESS]
+            # If the IP address is valid, create the config entry.
+            return self.async_create_entry(title=ip_address, data=user_input)
 
-        return self.async_show_menu(
+        # Show the form to the user.
+        return self.async_show_form(
             step_id="user",
-            menu_options={"Scan Network": "scan", "Add Manually": "manual"},
+            data_schema=vol.Schema(
+                {vol.Required(CONF_IP_ADDRESS): cv.string}
+            ),
         )
 
-    async def async_step_scan(self, user_input=None):
-        if user_input is not None:
-            print(user_input)
+    async def async_step_import(self, import_config):
+        """Import a configuration from configuration.yaml."""
+        # If there's already a config entry for this IP address, return it.
+        for entry in self._async_current_entries():
+            if entry.data[CONF_IP_ADDRESS] == import_config[CONF_IP_ADDRESS]:
+                return self.async_abort(reason="already_configured")
 
-        return self.async_show_menu(
-            step_id="user",
-            menu_options={"Scan Network": "scan", "Add Manually": "manual"},
+        # Create the config entry for this IP address.
+        return self.async_create_entry(
+            title=import_config[CONF_IP_ADDRESS], data=import_config
         )

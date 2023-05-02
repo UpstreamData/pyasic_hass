@@ -36,5 +36,3 @@ MINER_ATTRS = [
     ATTR_MINER_IDEAL_CHIPS,
     ATTR_MINER_EFFICIENCY,
 ]
-
-MINER_SCHEMA = vol.Schema({vol.Required(CONF_IP)})
