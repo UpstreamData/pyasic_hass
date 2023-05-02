@@ -1,6 +1,6 @@
 {
   "domain": "asic_miner",
-  "name": "pyasic for Home Assistant",
+  "name": "pyasic",
   "codeowners": ["@UpstreamData"],
   "documentation": "",
   "integration_type": "device",

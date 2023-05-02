@@ -15,7 +15,7 @@ from homeassistant.helpers.entity_registry import (
     async_get,
 )
 
-INIT_MINER_SCHEMA = vol.Schema(
+MINER_SCHEMA = vol.Schema(
     {
         vol.Required(CONF_IP): str,
     }

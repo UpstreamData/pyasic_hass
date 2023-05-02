@@ -9,6 +9,7 @@ packages = [{include = "pyasic_hass"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 homeassistant = "^2023.4.6"
+pyasic = "^0.33.9"
 
 
 [build-system]
