@@ -1,5 +1,5 @@
 {
-  "domain": "pyasic_hass",
+  "domain": "asic_miner",
   "name": "pyasic for Home Assistant",
   "codeowners": ["@UpstreamData"],
   "documentation": "",
