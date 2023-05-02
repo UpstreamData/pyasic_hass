@@ -1,0 +1,12 @@
+{
+  "title": "Miner",
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "ip": "[%key:common::config_flow::data::ip%]"
+        }
+      }
+    }
+  }
+}

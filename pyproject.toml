@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pyasic-hass"
+version = "0.1.0"
+description = ""
+authors = ["UpstreamData <brett@upstreamdata.ca>"]
+readme = "README.md"
+packages = [{include = "pyasic_hass"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+homeassistant = "^2023.4.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
