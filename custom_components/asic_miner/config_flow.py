@@ -22,7 +22,7 @@ class AsicMinerConfigFlow(config_entries.ConfigFlow, domain="asic_miner"):
         if user_input is not None:
             # Validate the IP address.
             ip_address = user_input[CONF_IP_ADDRESS]
-            result, err = validate_miner_ip(ip_address)
+            result, err = await validate_miner_ip(ip_address)
             if result:
                 # If the IP address is valid, create the config entry.
                 return self.async_create_entry(title=ip_address, data=user_input)
