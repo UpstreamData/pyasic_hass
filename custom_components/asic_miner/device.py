@@ -27,8 +27,7 @@ class MinerDevice(Entity):
 
     @property
     def device_state_attributes(self):
-        attributes = {}
-        attributes["available"] = self._available
+        attributes = {"available": self._available}
         return attributes
 
     async def async_update(self):
